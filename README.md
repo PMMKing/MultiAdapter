@@ -21,9 +21,8 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        compile 'com.github.evernightking:RecyclerViewLibrary:d8ebec3d2c'
+	        compile 'com.github.evernightking:RecyclerViewLibrary:3a8d5e67a3'
 	}
-Share this release:
 
 
 ###这是一个recyclerView 通用的 adapter 支持多布局，
