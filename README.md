@@ -1,4 +1,31 @@
 #RecyclerView Adapter 
+
+###应用到项目
+
+To get a Git project into your build:
+
+Step 1. Add the JitPack repository to your build file
+
+gradle
+maven
+sbt
+leiningen
+Add it in your root build.gradle at the end of repositories:
+
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+Step 2. Add the dependency
+
+	dependencies {
+	        compile 'com.github.evernightking:RecyclerViewLibrary:d8ebec3d2c'
+	}
+Share this release:
+
+
 ###这是一个recyclerView 通用的 adapter 支持多布局，
 viewholder需要继承baseViewHolder ，实现两个抽象方法去向布局中的view填充数据
 
