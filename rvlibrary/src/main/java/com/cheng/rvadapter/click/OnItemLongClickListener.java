@@ -1,9 +1,9 @@
-package com.cheng.rvadapter.rvadapter.click;
+package com.cheng.rvadapter.click;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.cheng.rvadapter.rvadapter.holder.BaseViewHolder;
+import com.cheng.rvadapter.holder.BaseViewHolder;
+
 
 /**
  * Created by shucheng.qu on 2016/12/16.

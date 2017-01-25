@@ -1,17 +1,14 @@
-package com.cheng.rvadapter.rvadapter.holder;
+package com.cheng.rvadapter.holder;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * Created by shucheng.qu on 2016/12/15.
  */
 
-public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
+public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 
     private View mConvertView;
     private Context mContext;
@@ -22,9 +19,7 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
         mConvertView = itemView;
     }
 
-    public abstract void onCreateViewHolder(BaseViewHolder holder);
-
-    public abstract void onBindViewHolder(BaseViewHolder holder, int position);
+    public abstract void onBindViewHolder(BaseViewHolder holder, T data, int position);
 
     public View getConvertView() {
         return mConvertView;

@@ -1,4 +1,4 @@
-package com.cheng.rvadapter.rvadapter.manage;
+package com.cheng.rvadapter.manage;
 
 import android.support.v4.util.SparseArrayCompat;
 
@@ -77,9 +77,9 @@ public class TypeViewManage<T> {
         return manageMap.get(typeView);
     }
 
-    public int getITypeViewLayoutId(int typeView) {
-        return manageMap.get(typeView).getItemViewLayoutId();
-    }
+//    public int getITypeViewLayoutId(int typeView) {
+//        return manageMap.get(typeView).getItemViewLayoutId();
+//    }
 
 
 }

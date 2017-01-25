@@ -1,15 +1,16 @@
-package com.cheng.rvadapter.rvadapter.adapter;
+package com.cheng.rvadapter.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cheng.rvadapter.rvadapter.click.OnItemClickListener;
-import com.cheng.rvadapter.rvadapter.click.OnItemLongClickListener;
-import com.cheng.rvadapter.rvadapter.holder.BaseViewHolder;
-import com.cheng.rvadapter.rvadapter.manage.ITypeView;
-import com.cheng.rvadapter.rvadapter.manage.TypeViewManage;
+
+import com.cheng.rvadapter.click.OnItemClickListener;
+import com.cheng.rvadapter.click.OnItemLongClickListener;
+import com.cheng.rvadapter.holder.BaseViewHolder;
+import com.cheng.rvadapter.manage.ITypeView;
+import com.cheng.rvadapter.manage.TypeViewManage;
 
 import java.util.List;
 
@@ -43,16 +44,15 @@ public class MultiAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
         if (iTypeView == null) {
             return null;
         }
-        int layoutId = iTypeView.getItemViewLayoutId();
-        BaseViewHolder viewHolder = iTypeView.createViewHolder(mContext, parent, layoutId);
-        viewHolder.onCreateViewHolder(viewHolder);
+//        int layoutId = iTypeView.getItemViewLayoutId();
+        BaseViewHolder viewHolder = iTypeView.createViewHolder(mContext, parent);
         setClickListener(parent, viewHolder, viewType);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
-        holder.onBindViewHolder(holder,position);
+    public void onBindViewHolder(BaseViewHolder holder,int position) {
+        holder.onBindViewHolder(holder,mDatas.get(position),position);
     }
 
     @Override
@@ -66,7 +66,6 @@ public class MultiAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
             return super.getItemViewType(position);
         return mTypeViewManage.getItemViewType(mDatas.get(position), position);
     }
-
 
     public TypeViewManage addTypeView(ITypeView iTypeView){
         return mTypeViewManage.addTypeView(iTypeView);
@@ -122,4 +121,9 @@ public class MultiAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
     public void setOnLongItemClickListener(OnItemLongClickListener itemLongClickListener) {
         this.itemLongClickListener = itemLongClickListener;
     }
+
+    public Context getContext(){
+        return mContext;
+    }
+
 }
