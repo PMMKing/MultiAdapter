@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
             @Override
             public BaseViewHolder createViewHolder(Context mContext, ViewGroup parent) {
-                return new ViewHolder(mContext, LayoutInflater.from(mContext).inflate(R.layout.item_layout , parent , false));
+                return new ViewHolder(mContext, LayoutInflater.from(mContext).inflate(R.layout.item_layout, parent, false));
             }
 
         }).addTypeView(new ITypeView() {
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
             @Override
             public BaseViewHolder createViewHolder(Context mContext, ViewGroup parent) {
-                return new ViewHolder2(mContext, LayoutInflater.from(mContext).inflate(R.layout.item2_layout , parent , false));
+                return new ViewHolder2(mContext, LayoutInflater.from(mContext).inflate(R.layout.item2_layout, parent, false));
             }
 
         });
