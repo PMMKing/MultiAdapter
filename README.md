@@ -2,12 +2,23 @@
 
 ###应用到项目
 
+````
+Step 1. Add it in your root build.gradle at the end of repositories:
+
+	
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+	
+Step 2. Add the dependency
 
 	dependencies {
-	        compile 'com.shucheng:rvAdapter:1.0.0'
+	        compile 'com.github.evernightking:RecyclerViewMultiAdapter:v1.0'
 	}
-
-
+````
 
 ###这是一个recyclerView 通用的 adapter 支持多布局，
 viewholder需要继承baseViewHolder ，实现抽象方法去向布局中的view填充数据
