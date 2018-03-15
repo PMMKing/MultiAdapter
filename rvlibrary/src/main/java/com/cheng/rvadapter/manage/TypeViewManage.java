@@ -65,7 +65,7 @@ public class TypeViewManage<T> {
                 return manageMap.keyAt(i);
             }
         }
-        throw new IllegalArgumentException("not found specifies the layout corresponding to the data for :" + position);
+        throw new IllegalArgumentException("not found specifies the layout corresponding to the datas for :" + position);
     }
 
 

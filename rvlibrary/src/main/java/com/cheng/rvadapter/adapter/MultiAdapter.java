@@ -12,6 +12,7 @@ import com.cheng.rvadapter.holder.BaseViewHolder;
 import com.cheng.rvadapter.manage.ITypeView;
 import com.cheng.rvadapter.manage.TypeViewManage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,9 +31,17 @@ public class MultiAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
     public MultiAdapter(Context context, List<T> datas) {
         mContext = context;
         mDatas = datas;
+        if (mDatas == null) {
+            mDatas = new ArrayList<T>();
+        }
         mTypeViewManage = new TypeViewManage();
     }
 
+    public MultiAdapter(Context context) {
+        mContext = context;
+        mDatas = new ArrayList<T>();
+        mTypeViewManage = new TypeViewManage();
+    }
 
     private boolean multiLayout() {
         return mTypeViewManage.getManageSize() > 0;
@@ -46,13 +55,14 @@ public class MultiAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
         }
 //        int layoutId = iTypeView.getItemViewLayoutId();
         BaseViewHolder viewHolder = iTypeView.createViewHolder(mContext, parent);
+        viewHolder.setmDatas(mDatas);
         setClickListener(parent, viewHolder, viewType);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder holder,int position) {
-        holder.onBindViewHolder(holder,mDatas.get(position),position);
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
+        holder.onBindViewHolder(holder, mDatas.get(position), position);
     }
 
     @Override
@@ -67,12 +77,14 @@ public class MultiAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
         return mTypeViewManage.getItemViewType(mDatas.get(position), position);
     }
 
-    public TypeViewManage addTypeView(ITypeView iTypeView){
-        return mTypeViewManage.addTypeView(iTypeView);
+    public MultiAdapter<T> addTypeView(ITypeView iTypeView) {
+        mTypeViewManage.addTypeView(iTypeView);
+        return this;
     }
 
-    public TypeViewManage addTypeView(ITypeView iTypeView , int layoutId) {
-        return mTypeViewManage.addTypeView(iTypeView,layoutId);
+    public MultiAdapter<T> addTypeView(ITypeView iTypeView, int layoutId) {
+        mTypeViewManage.addTypeView(iTypeView, layoutId);
+        return this;
     }
 
 
@@ -83,7 +95,11 @@ public class MultiAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
             public void onClick(View view) {
                 if (itemClickListener != null) {
                     int position = viewHolder.getAdapterPosition();
-                    itemClickListener.onItemClickListener(view, viewHolder, position);
+                    try {//当调用notifyDataSetChanged();d的瞬间触发onclick事件，recycleview为null，position返回为-1
+                        itemClickListener.onItemClickListener(view, mDatas.get(position), position);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -93,7 +109,11 @@ public class MultiAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
             public boolean onLongClick(View view) {
                 if (itemLongClickListener != null) {
                     int position = viewHolder.getAdapterPosition();
-                    return itemLongClickListener.onItemLongClickListener(view, viewHolder, position);
+                    try {
+                        return itemLongClickListener.onItemLongClickListener(view, mDatas.get(position), position);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                    }
                 }
                 return false;
             }
@@ -101,18 +121,47 @@ public class MultiAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
 
     }
 
-    public void setData(List<T> mDatas){
+    public void setData(List<T> mDatas) {
+        setData(mDatas, true);
+    }
+
+    public void setData(List<T> mDatas, boolean refresh) {
         this.mDatas.clear();
         this.mDatas.addAll(mDatas);
-        notifyDataSetChanged();
+        if (refresh) {
+            notifyDataSetChanged();
+        }
     }
 
-    public void addData(List<T> mDatas){
+    public void addData(T t) {
+        this.mDatas.add(t);
+    }
+
+    public void addData(T t, int index) {
+        this.mDatas.add(index, t);
+    }
+
+    public void addData(List<T> mDatas) {
+        addData(mDatas, true);
+    }
+
+    public void addData(List<T> mDatas, Boolean refresh) {
+        if (mDatas == null) return;
         this.mDatas.addAll(mDatas);
-        notifyDataSetChanged();
+        if (refresh) {
+            notifyDataSetChanged();
+        }
+    }
+
+    public void removeData(int index) {
+        if (mDatas.size() <= index) return;
+        this.mDatas.remove(index);
     }
 
 
+    public List<T> getData() {
+        return mDatas;
+    }
 
     public void setOnItemClickListener(OnItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
@@ -122,7 +171,7 @@ public class MultiAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
         this.itemLongClickListener = itemLongClickListener;
     }
 
-    public Context getContext(){
+    public Context getContext() {
         return mContext;
     }
 

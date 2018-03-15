@@ -6,7 +6,7 @@
 	dependencies {
 	        compile 'com.shucheng:rvAdapter:1.0.0'
 	}
-Share this release:
+
 
 
 ###这是一个recyclerView 通用的 adapter 支持多布局，
