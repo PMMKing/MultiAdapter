@@ -28,14 +28,13 @@ import java.util.Random;
 public class MainActivity extends Activity {
 
 
-    private RecyclerView rlvTest;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rlvTest = findViewById(R.id.rlv_test);
+        RecyclerView rlvTest = findViewById(R.id.rlv_test);
 
         rlvTest.setLayoutManager(new LinearLayoutManager(this));
         MultiAdapter<Integer> adapter = new MultiAdapter<Integer>(this).addTypeView(new ITypeView<Integer>() {
