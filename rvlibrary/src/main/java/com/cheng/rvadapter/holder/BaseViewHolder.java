@@ -22,16 +22,7 @@ public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
         mConvertView = itemView;
     }
 
-//    public BaseViewHolder(Context context, ViewGroup pare) {
-//        this(context, LayoutInflater.from(context).inflate(getLayoutResId(),pare,false));
-//    }
-
     public abstract void onBindViewHolder(BaseViewHolder holder, T data, int position);
-
-//    public int getLayoutResId() {
-//
-//        return 0;
-//    }
 
     public View getConvertView() {
         return mConvertView;

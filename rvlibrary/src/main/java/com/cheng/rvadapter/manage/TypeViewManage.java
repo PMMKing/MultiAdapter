@@ -8,9 +8,8 @@ import android.support.v4.util.SparseArrayCompat;
 
 public class TypeViewManage<T> {
 
-
     SparseArrayCompat<ITypeView<T>> manageMap = new SparseArrayCompat<ITypeView<T>>();
-    int key = -1;
+    private int key = -1;
 
     /**
      * @param typeView
@@ -68,7 +67,6 @@ public class TypeViewManage<T> {
         throw new IllegalArgumentException("not found specifies the layout corresponding to the datas for :" + position);
     }
 
-
     public int getManageSize() {
         return manageMap.size();
     }
@@ -76,10 +74,5 @@ public class TypeViewManage<T> {
     public ITypeView<T> getITypeView(int typeView) {
         return manageMap.get(typeView);
     }
-
-//    public int getITypeViewLayoutId(int typeView) {
-//        return manageMap.get(typeView).getItemViewLayoutId();
-//    }
-
 
 }

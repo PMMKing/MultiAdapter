@@ -27,8 +27,6 @@ import java.util.Random;
 
 public class MainActivity extends Activity {
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
