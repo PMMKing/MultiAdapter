@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
         MultiAdapter<Integer> adapter = new MultiAdapter<Integer>(this).addTypeView(new ITypeView<Integer>() {
             @Override
             public boolean isForViewType(Integer item, int position) {
-                return position % 2 == 0;
+                return true;
             }
 
             @Override
@@ -48,12 +48,22 @@ public class MainActivity extends Activity {
         }).addTypeView(new ITypeView<Integer>() {
             @Override
             public boolean isForViewType(Integer item, int position) {
-                return position % 2 != 0;
+                return position % 2 == 0;
             }
 
             @Override
             public BaseViewHolder createViewHolder(Context mContext, ViewGroup parent) {
                 return new ViewHolderTwo(mContext, LayoutInflater.from(mContext).inflate(R.layout.item2_layout, parent, false));
+            }
+        }).addTypeView(new ITypeView() {
+            @Override
+            public boolean isForViewType(Object item, int position) {
+                return position % 3 == 0;
+            }
+
+            @Override
+            public BaseViewHolder createViewHolder(Context mContext, ViewGroup parent) {
+                return new ViewHolderThrid(mContext,R.layout.item3_layout);
             }
         });
         rlvTest.setAdapter(adapter);

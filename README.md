@@ -88,8 +88,8 @@ public class ViewHolder extends BaseViewHolder {
 ```
 
 ### 更新日志
-去掉ITypeView中的指定布局方法，改为直接new viewholder并返回
-viewholder去掉onCreateViewHolder 方法，改为在构造方法中绑定view
+- 去掉ITypeView中的指定布局方法，改为直接new viewholder并返回
+- viewholder去掉onCreateViewHolder 方法，改为在构造方法中绑定view
 
 ```
  @Override
@@ -99,4 +99,10 @@ viewholder去掉onCreateViewHolder 方法，改为在构造方法中绑定view
             
 ```
 
-这里必须使用 LayoutInflater.from(mContext).inflate(R.layout.item2_layout , parent , false)这个方法，View.inflate()方法会报错。
+这里必须使用 LayoutInflater.from(mContext).inflate(R.layout.item2_layout , parent , false)这个方法。
+
+- 增加viewholder 构造函数
+
+```
+new ViewHolderThrid(mContext,R.layout.item3_layout);
+```
